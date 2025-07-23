@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:17:08 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/07/23 22:12:25 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/07/23 22:20:29 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ BitcoinExchange::BitcoinExchange()
 {
     std::cout << "Loading database..." << std::endl;
     std::ifstream file("database.csv");
+    if (!file.is_open())
+        throw std::runtime_error("Error: could not open database.csv");
+    
     std::string line;
     
     // Skip header line
@@ -43,6 +46,9 @@ void BitcoinExchange::processFile(const std::string &filename)
 {
     try {
         std::ifstream file(filename);
+        if (!file.is_open())
+            throw std::runtime_error("Error: could not open file => " + filename);
+        
         std::string line;
         
         // Skip header line
@@ -144,4 +150,18 @@ std::string BitcoinExchange::trim(const std::string &str)
        
        // Return substring from start to end
        return str.substr(start, end - start + 1);
+}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
+{
+    *this = other;
+}
+
+BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
+{
+    if (this != &other)
+    {
+        _data = other._data;
+    }
+    return *this;
 }
