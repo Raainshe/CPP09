@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 09:47:57 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/07/25 10:29:19 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/07/25 14:02:04 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ PmergeMe::PmergeMe(char **args)
 {
     std::cout << "PmergeMe constructor" << std::endl;
     if (!validateArgs(args))
-        throw std::invalid_argument("Invalid arguments");
+    {
+        std::cout << "Error" << std::endl;
+        return;
+    }
     // add args to vector and deque
     for (int i = 0; args[i]; i++)
     {
