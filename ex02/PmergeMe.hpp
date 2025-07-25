@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 09:48:03 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/07/25 10:15:49 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/07/25 17:25:37 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,17 @@ class PmergeMe
         bool validateArgs(char **args);
         bool isSorted(std::vector<int> &vector);
         bool isSorted(std::deque<int> &deque);
+        void sortVector(std::vector<int> &vector);
+        void sortDeque(std::deque<int> &deque);
+        void fordJohnsonSortVector(std::vector<int> &vector);
+        void fordJohnsonSortDeque(std::deque<int> &deque);
+        void printContainer(const std::vector<int> &vector, const std::string &label);
+        void printContainer(const std::deque<int> &deque, const std::string &label);
     public:
         PmergeMe();
         PmergeMe(char **args);
         ~PmergeMe();
+        void processAndDisplay(); // Triggers sorting, timing, and output
 };
 
 #endif
