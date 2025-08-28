@@ -6,7 +6,7 @@
 /*   By: rmakoni <rmakoni@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:17:08 by rmakoni           #+#    #+#             */
-/*   Updated: 2025/07/23 22:20:29 by rmakoni          ###   ########.fr       */
+/*   Updated: 2025/08/28 10:06:13 by rmakoni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,31 @@ void BitcoinExchange::processFile(const std::string &filename)
             else
             {
                 if (!validateDate(date))
-                    std::cerr << "Error: bad input => " << date << std::endl;
+                {
+                    if (date.length() == 0)
+                        std::cerr << "Error: empty date" << std::endl;
+                    else
+                        std::cerr << "Error: bad input => " << date << std::endl;
+                }
                 if (!validateValue(value))
-                    std::cerr << "Error: bad input => " << value << std::endl;
+                {
+                    try {
+                        std::stod(value);
+                    } catch (std::exception &e) {
+                        if (value.length() == 0)
+                            std::cerr << "Error: empty value" << std::endl;
+                        else
+                            std::cerr << "Error: bad input => " << value << std::endl;
+                    }
+                    try {
+                        if (std::stod(value) < 0)
+                            std::cerr << "Error: not a positive number." << std::endl;
+                        else if (std::stod(value) > 1000)
+                            std::cerr << "Error: too large a number." << std::endl;
+                    } catch (std::exception &e) {
+                        std::cerr << "Error: bad input => " << value << std::endl;
+                    }
+                }
             }
         }
         file.close();
